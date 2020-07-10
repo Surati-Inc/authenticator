@@ -12,7 +12,7 @@
 	<p>
 		Authentication for users by token. <br/>
 		
-		<p>User for test (Login / password) : <code>user / pwd1</code></p>
+		<p>User for test (Login / password) : <code>user / pwd</code></p>
 		
 		<h4>Generate a token</h4>
 		<code>
