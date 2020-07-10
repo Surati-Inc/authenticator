@@ -1,2 +1,2 @@
 # authenticator
-Authentification system
+Authentication system
