@@ -5,17 +5,15 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.json.Json;
-import javax.json.JsonObject;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqGreedy;
+import org.takes.rq.form.RqFormSmart;
 import org.takes.rs.RsJson;
 import org.takes.rs.RsWithStatus;
 
 import com.security.authenticator.encryption.JwtToken;
-import com.security.authenticator.rq.RqJson;
-import com.security.authenticator.rq.RqJsonBase;
 import com.security.authenticator.web.Main;
 
 import io.jsonwebtoken.Claims;
@@ -35,11 +33,10 @@ public class TkSignin implements Take {
 	@Override
 	public Response act(Request req) throws Exception {
 		
-		final RqJson rqJson = new RqJsonBase(new RqGreedy(req));
-		JsonObject payload = rqJson.payload().asJsonObject();
+		final RqFormSmart form = new RqFormSmart(new RqGreedy(req));
 		
-		final String login = payload.getString("login");
-		final String password = payload.getString("password");
+		final String login = form.single("login");
+		final String password = form.single("password");
 		
 		try {
 			if(login.equals("user") && password.equals("pwd")) {

@@ -41,12 +41,12 @@ public class TkValidateTokenITCase {
 				public void exec(URI home) throws Exception {
 					
 					final Request request = new JdkRequest(home);
-			        final String body = "{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1OTQzMzkyMDAsImlzcyI6IkF1dGhlbnRpY2F0b3IiLCJzdWIiOiJ1c2VyIn0.00DCCosD4yOpjSGwxcIU5RSBTCd1oZ5adWlzcZhjtrdIQgA7YbsZepOl_v94IfKD1exDC_98Re4aC1UsWYFogQ\"}";
+			        final String body = "token=eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1OTQzMzkyMDAsImlzcyI6IkF1dGhlbnRpY2F0b3IiLCJzdWIiOiJ1c2VyIn0.00DCCosD4yOpjSGwxcIU5RSBTCd1oZ5adWlzcZhjtrdIQgA7YbsZepOl_v94IfKD1exDC_98Re4aC1UsWYFogQ";
 			        try(
 			        	final InputStream bodyStream = new ByteArrayInputStream(body.getBytes());
 			        ){
 			        	request.uri().path("token/validate").back()
-					           .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
+					           .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
 						       .method(Request.POST)
 						       .fetch(bodyStream)
 						       .as(RestResponse.class)
@@ -73,12 +73,12 @@ public class TkValidateTokenITCase {
 					final Request request = new JdkRequest(home);
 					// token of subject user1 (not registered)
 					
-			        final String body = "{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwiaWF0IjoxNTk0MjUyODAwLCJpc3MiOiJBdXRoZW50aWNhdG9yIiwic3ViIjoidXNlcjEifQ.YHAEbnrFqi2616je__XLtj0ZdfVsVNWu0jLbw_qtIuTC0-9xbnZ60mf2zG_7p5wXomWvgbr6YVXp_tY9357Fvg\"}";
+			        final String body = "token=eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwiaWF0IjoxNTk0MjUyODAwLCJpc3MiOiJBdXRoZW50aWNhdG9yIiwic3ViIjoidXNlcjEifQ.YHAEbnrFqi2616je__XLtj0ZdfVsVNWu0jLbw_qtIuTC0-9xbnZ60mf2zG_7p5wXomWvgbr6YVXp_tY9357Fvg";
 			        try(
 			        	final InputStream bodyStream = new ByteArrayInputStream(body.getBytes());
 			        ){
 			        	request.uri().path("token/validate").back()
-				               .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
+				               .header(HttpHeaders.CONTENT_LENGTH, MediaType.APPLICATION_FORM_URLENCODED)
 					           .method(Request.POST)
 					           .fetch(bodyStream)
 					           .as(RestResponse.class)

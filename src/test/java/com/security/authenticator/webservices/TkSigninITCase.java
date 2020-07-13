@@ -41,17 +41,17 @@ public class TkSigninITCase {
 				public void exec(URI home) throws Exception {
 					
 					final Request request = new JdkRequest(home);
-			        final String body = "{\"login\": \"user\", \"password\": \"pwd\"}";
+					final String body = "login=user&password=pwd";
 			        try(
 			        		final InputStream bodyStream = new ByteArrayInputStream(body.getBytes());
 			        ){			        	
 			        	request.uri().path("token").back()
-				               .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
+				               .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
 				               .method(Request.POST)
 				               .fetch(bodyStream)
 				               .as(RestResponse.class)
 				               .assertStatus(HttpURLConnection.HTTP_CREATED)
-				               .assertBody(Matchers.equalTo("{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1OTQzMzkyMDAsImlzcyI6IkF1dGhlbnRpY2F0b3IiLCJzdWIiOiJ1c2VyIn0.00DCCosD4yOpjSGwxcIU5RSBTCd1oZ5adWlzcZhjtrdIQgA7YbsZepOl_v94IfKD1exDC_98Re4aC1UsWYFogQ\"}"));
+				               .assertBody(Matchers.equalTo("{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1OTQ1MTIwMDAsImlzcyI6IkF1dGhlbnRpY2F0b3IiLCJzdWIiOiJ1c2VyIn0.XlMqNk3VMzOdsangfn7Pxgo0EQpP4Oag0dMXEy_2JI9LyzFTKNLysONoPj4t99dJwrXtlP9IbicyD3CPkphsjg\"}"));
 			        }			        	        			      
 				}
 		});        
@@ -72,12 +72,12 @@ public class TkSigninITCase {
 				public void exec(URI home) throws Exception {
 					
 					final Request request = new JdkRequest(home);
-			        final String body = "{\"login\": \"user\", \"password\": \"pwd1\"}";
+			        final String body = "login=user&password=pwd1";
 			        try(
 			        	final InputStream bodyStream = new ByteArrayInputStream(body.getBytes());
 			        ){
 			        	request.uri().path("token").back()
-				               .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
+				               .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
 					           .method(Request.POST)
 					           .fetch(bodyStream)
 					           .as(RestResponse.class)
