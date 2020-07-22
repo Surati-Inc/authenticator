@@ -50,7 +50,8 @@ public class TkValidateTokenITCase {
 						       .method(Request.POST)
 						       .fetch(bodyStream)
 						       .as(RestResponse.class)
-						       .assertStatus(HttpURLConnection.HTTP_NO_CONTENT);
+						       .assertStatus(HttpURLConnection.HTTP_ACCEPTED)
+						       .assertBody(Matchers.equalTo("{\"login\":\"user\"}"));
 			        }			        			        			      
 				}
 		});        

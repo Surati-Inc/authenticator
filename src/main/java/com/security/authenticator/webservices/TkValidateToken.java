@@ -42,7 +42,14 @@ public class TkValidateToken implements Take {
 			final String issuer = claims.getIssuer();
 			
 			if(login.equals("user") && issuer.equals("Authenticator")) {
-				return new RsWithStatus(HttpURLConnection.HTTP_NO_CONTENT);
+				return new RsWithStatus(
+						new RsJson(
+							Json.createObjectBuilder()
+							.add("login", login)
+							.build()
+						),
+						HttpURLConnection.HTTP_ACCEPTED
+				);
 			} else {
 				throw new IllegalArgumentException("Token is invalid !");
 			}			
