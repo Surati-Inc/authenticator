@@ -18,6 +18,7 @@ import com.jcabi.http.Request;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import com.security.authenticator.web.TkApp;
+import com.security.authenticator.webservices.TkSignin;
 
 /**
  * Test case for {@link TkSignin}

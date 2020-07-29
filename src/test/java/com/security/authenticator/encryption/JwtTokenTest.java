@@ -5,6 +5,9 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
+import com.security.authenticator.encryption.JwtToken;
+import com.security.authenticator.encryption.Token;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
