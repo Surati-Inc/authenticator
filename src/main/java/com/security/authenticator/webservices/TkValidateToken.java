@@ -48,7 +48,7 @@ public class TkValidateToken implements Take {
 							.add("login", login)
 							.build()
 						),
-						HttpURLConnection.HTTP_ACCEPTED
+						HttpURLConnection.HTTP_OK
 				);
 			} else {
 				throw new IllegalArgumentException("Token is invalid !");
@@ -62,6 +62,15 @@ public class TkValidateToken implements Take {
 						.build()
 					),
 				HttpURLConnection.HTTP_BAD_REQUEST
+			);
+		} catch(Exception e) {
+			return new RsWithStatus(
+				new RsJson(
+					Json.createObjectBuilder()
+					.add("message", e.getLocalizedMessage())
+					.build()
+				),
+				HttpURLConnection.HTTP_INTERNAL_ERROR
 			);
 		}
 		

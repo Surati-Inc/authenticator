@@ -69,6 +69,15 @@ public class TkSignin implements Take {
 				),
 				HttpURLConnection.HTTP_BAD_REQUEST
 			);
+		} catch(Exception e) {
+			return new RsWithStatus(
+				new RsJson(
+					Json.createObjectBuilder()
+					.add("message", e.getLocalizedMessage())
+					.build()
+				),
+				HttpURLConnection.HTTP_INTERNAL_ERROR
+			);
 		}
 		
 	}
