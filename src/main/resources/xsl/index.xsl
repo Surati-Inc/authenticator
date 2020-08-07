@@ -8,36 +8,9 @@
 		</title>
 	</xsl:template>
 	<xsl:template match="page" mode="body">
-	<h3 style="text-align: center; margin-top: 0px; margin-bottom: 0px; color: green; font-weight: bold;"><xsl:text>Authenticator</xsl:text></h3>
-	<p>
-		Authentication for users by token. <br/>
-		
-		<p>User for test (Login / password) : <code>user / pwd</code></p>
-		
-		<h4>Generate a token</h4>
-		<code>
-		<div>
-			POST /token HTTP/1.1<br/>
-			Host: https://authenticator.surati.io<br/>
-			Content-Type: application/json<br/>
-			{<br/>
-			"login": "put_your_login_here",<br/>
-			"password": "put_your_password_here"<br/>
-			}<br/>
-		</div>
-		</code>
-		
-		<h4>Validate a token</h4>
-		<code>
-		<div>
-			POST /token/validate HTTP/1.1<br/>
-			Host: https://authenticator.surati.io<br/>
-			Content-Type: application/json<br/>
-			{<br/>
-			"token": "put_your_jwt_token_here"<br/>
-			}<br/>
-		</div>
-		</code>		
+	<h2 style="text-align: center;"><xsl:text>Authenticator</xsl:text></h2>
+	<p align="justify">
+		You are welcome ! This application is used to store credentials, authenticate users and validate authentication. We use <a href="https://fr.wikipedia.org/wiki/JSON_Web_Token" target="_blank">JSON Web Token (Jwt)</a> to secure exchanges as it is defined in <a href="https://tools.ietf.org/html/rfc7519" target="_blank">RFC 7519</a>.	
 	</p>
 	
 	</xsl:template>
