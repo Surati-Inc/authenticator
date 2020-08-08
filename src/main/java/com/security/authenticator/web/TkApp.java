@@ -64,125 +64,125 @@ public final class TkApp extends TkWrap {
 									new TkAnonymous(new TkLogin(suratiUrl))
 								),
 								new FkRegex(
-									"/token", 
+									"/api/token", 
 									new TkFork(
 										new FkMethods("POST", new TkSignin(database))
 									)
 								),
 								new FkRegex(
-									"/token/validate", 
+									"/api/token/validate", 
 									new TkFork(
 										new FkMethods("POST", new TkValidateToken(database))
 									)
 								),
-									new FkRegex(
-										"/users", 
-										new TkSecure(
-											new TkUsers(database)
+								new FkRegex(
+									"/users", 
+									new TkSecure(
+										new TkUsers(database)
+									)
+								),
+								new FkRegex(
+									"/user/visualize", 
+									new TkSecure(
+										new TkVisualizeUser(database)
+									)
+								),
+								new FkRegex(
+									"/user/new", 
+									new TkSecure(
+										new TkNewUser()
+									)
+								),
+								new FkRegex(
+									"/user/register", 
+									new TkSecure(
+										new TkTransaction(
+											new TkRegisterUser(database), 
+											database
 										)
-									),
-									new FkRegex(
-										"/user/visualize", 
-										new TkSecure(
-											new TkVisualizeUser(database)
+									)
+								),
+								new FkRegex(
+									"/user/name/edit", 
+									new TkSecure(
+										new TkEditUserName(database)
+									)
+								),
+								new FkRegex(
+									"/user/password/edit", 
+									new TkSecure(
+										new TkEditUserPassword(database)
+									)
+								),
+								new FkRegex(
+									"/user/name/save", 
+									new TkSecure(
+										new TkTransaction(
+											new TkSaveUserName(database), 
+											database
 										)
-									),
-									new FkRegex(
-										"/user/new", 
-										new TkSecure(
-											new TkNewUser()
+									)
+								),
+								new FkRegex(
+									"/user/password/save", 
+									new TkSecure(
+										new TkTransaction(
+											new TkSaveUserPassword(database), 
+											database
 										)
-									),
-									new FkRegex(
-										"/user/register", 
-										new TkSecure(
-											new TkTransaction(
-												new TkRegisterUser(database), 
-												database
-											)
+									)
+								),
+								new FkRegex(
+									"/user/block", 
+									new TkSecure(
+										new TkTransaction(
+											new TkBlockUser(database), 
+											database
 										)
-									),
-									new FkRegex(
-										"/user/name/edit", 
-										new TkSecure(
-											new TkEditUserName(database)
-										)
-									),
-									new FkRegex(
-										"/user/password/edit", 
-										new TkSecure(
-											new TkEditUserPassword(database)
-										)
-									),
-									new FkRegex(
-										"/user/name/save", 
-										new TkSecure(
-											new TkTransaction(
-												new TkSaveUserName(database), 
-												database
-											)
-										)
-									),
-									new FkRegex(
-										"/user/password/save", 
-										new TkSecure(
-											new TkTransaction(
-												new TkSaveUserPassword(database), 
-												database
-											)
-										)
-									),
-									new FkRegex(
-										"/user/block", 
-										new TkSecure(
-											new TkTransaction(
-												new TkBlockUser(database), 
-												database
-											)
-										)
-									),
-									new FkRegex(
-										"/api/user", 
-										new TkFork(
-											new FkMethods(
-												"POST", 
-												new TkSecure(
-													new TkTransaction(
-														new TkSignup(database), 
-														database
-													)
+									)
+								),
+								new FkRegex(
+									"/api/user", 
+									new TkFork(
+										new FkMethods(
+											"POST", 
+											new TkSecure(
+												new TkTransaction(
+													new TkSignup(database), 
+													database
 												)
 											)
-										)										
-									),
-									new FkRegex(
-										"/api/user/password", 
-										new TkFork(
-											new FkMethods(
-												"POST", 
-												new TkSecure(
-													new TkTransaction(
-														new TkChangeUserPassword(database), 
-														database
-													)
+										)
+									)										
+								),
+								new FkRegex(
+									"/api/user/password", 
+									new TkFork(
+										new FkMethods(
+											"POST", 
+											new TkSecure(
+												new TkTransaction(
+													new TkChangeUserPassword(database), 
+													database
 												)
 											)
-										)										
-									),
-									new FkRegex(
-										"/api/user/block", 
-										new TkFork(
-											new FkMethods(
-												"POST", 
-												new TkSecure(
-													new TkTransaction(
-														new TkBlockUser(database), 
-														database
-													)
+										)
+									)										
+								),
+								new FkRegex(
+									"/api/user/block", 
+									new TkFork(
+										new FkMethods(
+											"POST", 
+											new TkSecure(
+												new TkTransaction(
+													new TkBlockUser(database), 
+													database
 												)
 											)
-										)										
-									)								
+										)
+									)										
+								)								
 							)
 						)
 					)
