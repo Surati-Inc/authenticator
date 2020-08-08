@@ -11,6 +11,7 @@ import org.takes.tk.TkSlf4j;
 import org.takes.tk.TkWithType;
 import org.takes.tk.TkWrap;
 
+import com.minlessika.secure.TkAnonymous;
 import com.security.authenticator.webservices.TkSignin;
 import com.security.authenticator.webservices.TkValidateToken;
 
@@ -25,15 +26,15 @@ public final class TkApp extends TkWrap {
 	/**
 	 * Ctor.
 	 */
-	public TkApp() {
-		super(make());
+	public TkApp(final String suratiUrl) {
+		super(make(suratiUrl));
 	}
 
 	/**
 	 * Ctor.
 	 * @return Takes
 	 */
-	private static Take make() {
+	private static Take make(final String suratiUrl) {
 		return new TkSlf4j(
 				new TkForward(
 						new TkFlash(
@@ -53,6 +54,10 @@ public final class TkApp extends TkWrap {
 								new FkRegex("/robots\\.txt", ""),
 								new FkRegex("/", new TkIndex()),
 								new FkRegex(
+									"/login", 
+									new TkAnonymous(new TkLogin(suratiUrl))
+								),
+								new FkRegex(
 									"/token", 
 									new TkFork(
 										new FkMethods("POST", new TkSignin())
@@ -63,7 +68,7 @@ public final class TkApp extends TkWrap {
 									new TkFork(
 										new FkMethods("POST", new TkValidateToken())
 									)
-								)
+								)								
 							)
 						)
 					)

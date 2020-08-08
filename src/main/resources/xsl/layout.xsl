@@ -33,6 +33,41 @@
 								</li>
 							</ul>
 						</nav>
+						<nav>
+							<ul>
+								<li>
+									<xsl:if test="identity">
+									    <xsl:text>@</xsl:text>
+					                    <xsl:value-of select="identity/login"/>															                   
+					                </xsl:if>
+					                <xsl:if test="not(identity)">
+					                    <a href="/login">
+											Login
+										</a>
+					                </xsl:if>									
+								</li>
+							
+								<xsl:if test="identity">								    
+									<li>
+										<xsl:choose>
+									    	<xsl:when test="menu = 'users'">
+									    	    <xsl:text>Users</xsl:text>
+										    </xsl:when>
+										    <xsl:otherwise>
+										    	<a href="/users">										    
+													<xsl:text>Users</xsl:text>
+												</a>
+										    </xsl:otherwise>
+									    </xsl:choose>
+									</li>
+									<li>
+										<a href="{links/link[@rel='takes:logout']/@href}">
+											<xsl:text>Logout</xsl:text>
+										</a>
+									</li>
+								</xsl:if>
+							</ul>
+						</nav>
 					</header>
 					<article>
 						<xsl:apply-templates select="." mode="body"/>

@@ -107,6 +107,11 @@
 	    <version>1.17.3</version>
 	    <scope>test</scope>
 	</dependency>   
+	<dependency>
+		<groupId>com.minlessika</groupId>
+		<artifactId>takes-utils</artifactId>
+		<version>0.0.1</version>
+	</dependency> 
   </dependencies>
   
   <build>
@@ -145,6 +150,8 @@
               <cleanupDaemonThreads>false</cleanupDaemonThreads>
               <arguments>
                 <argument>--port=${port}</argument>
+                <argument>--domain=${domain}</argument>
+                <argument>--surati-url=${surati.url}</argument>
                 <argument>--hit-refresh</argument>
               </arguments>
             </configuration>

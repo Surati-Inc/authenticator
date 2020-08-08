@@ -34,7 +34,7 @@ public class TkSigninITCase {
 	@Test
     public void generateTokenTest() throws Exception {
 		
-		final Take app = new TkApp();
+		final Take app = new TkApp("https://www.surati.io");
 		
 		new FtRemote(app).exec(
 			new Script() {			
@@ -65,7 +65,7 @@ public class TkSigninITCase {
 	@Test
     public void generateTokenFailsTest() throws Exception {
 		
-		final Take app = new TkApp();
+		final Take app = new TkApp("https://www.surati.io");
 		
 		new FtRemote(app).exec(
 			new Script() {			
