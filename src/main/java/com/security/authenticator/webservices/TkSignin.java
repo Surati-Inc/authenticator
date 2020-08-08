@@ -13,7 +13,10 @@ import org.takes.rq.form.RqFormSmart;
 import org.takes.rs.RsJson;
 import org.takes.rs.RsWithStatus;
 
+import com.minlessika.db.Database;
 import com.security.authenticator.encryption.JwtToken;
+import com.security.authenticator.users.DbUsers;
+import com.security.authenticator.users.Users;
 import com.security.authenticator.web.Main;
 
 import io.jsonwebtoken.Claims;
@@ -30,6 +33,12 @@ import io.jsonwebtoken.Jwts;
 
 public class TkSignin implements Take {
 	
+	private final Database source;
+	
+	public TkSignin(final Database source) {
+		this.source = source;
+	}
+	
 	@Override
 	public Response act(Request req) throws Exception {
 		
@@ -39,7 +48,9 @@ public class TkSignin implements Take {
 		final String password = form.single("password");
 		
 		try {
-			if(login.equals("user") && password.equals("pwd")) {
+			final Users users = new DbUsers(source);
+			
+			if(users.authenticate(login, password)) {
 				
 				final Claims claims = Jwts.claims()
 										  .setIssuedAt(Date.valueOf(LocalDate.now()))

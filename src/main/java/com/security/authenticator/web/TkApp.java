@@ -66,13 +66,13 @@ public final class TkApp extends TkWrap {
 								new FkRegex(
 									"/token", 
 									new TkFork(
-										new FkMethods("POST", new TkSignin())
+										new FkMethods("POST", new TkSignin(database))
 									)
 								),
 								new FkRegex(
 									"/token/validate", 
 									new TkFork(
-										new FkMethods("POST", new TkValidateToken())
+										new FkMethods("POST", new TkValidateToken(database))
 									)
 								),
 									new FkRegex(

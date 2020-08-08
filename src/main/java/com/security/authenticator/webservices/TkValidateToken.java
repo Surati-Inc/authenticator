@@ -11,8 +11,11 @@ import org.takes.rq.form.RqFormSmart;
 import org.takes.rs.RsJson;
 import org.takes.rs.RsWithStatus;
 
+import com.minlessika.db.Database;
 import com.security.authenticator.encryption.JwtToken;
 import com.security.authenticator.encryption.Token;
+import com.security.authenticator.users.DbUsers;
+import com.security.authenticator.users.Users;
 import com.security.authenticator.web.Main;
 
 import io.jsonwebtoken.Claims;
@@ -28,6 +31,12 @@ import io.jsonwebtoken.Claims;
 
 public class TkValidateToken implements Take {
 	
+private final Database source;
+	
+	public TkValidateToken(final Database source) {
+		this.source = source;
+	}
+	
 	@Override
 	public Response act(Request req) throws Exception {
 		
@@ -41,7 +50,9 @@ public class TkValidateToken implements Take {
 			final String login = claims.getSubject();
 			final String issuer = claims.getIssuer();
 			
-			if(login.equals("user") && issuer.equals("Authenticator")) {
+			final Users users = new DbUsers(source);
+			
+			if(users.has(login) && issuer.equals("Authenticator")) {
 				return new RsWithStatus(
 						new RsJson(
 							Json.createObjectBuilder()
