@@ -112,6 +112,22 @@
 		<artifactId>takes-utils</artifactId>
 		<version>0.0.1</version>
 	</dependency> 
+	<dependency>
+  		<groupId>org.postgresql</groupId>
+  		<artifactId>postgresql</artifactId>
+  		<version>9.4.1211.jre7</version>
+  	</dependency>
+	<dependency>
+	    <groupId>com.h2database</groupId>
+	    <artifactId>h2</artifactId>
+	    <version>1.4.197</version>
+	    <scope>test</scope>
+	</dependency>
+	<dependency>
+        <groupId>com.zaxxer</groupId>
+        <artifactId>HikariCP</artifactId>
+        <version>2.5.1</version>
+    </dependency>
   </dependencies>
   
   <build>
@@ -150,6 +166,11 @@
               <cleanupDaemonThreads>false</cleanupDaemonThreads>
               <arguments>
                 <argument>--port=${port}</argument>
+                <argument>--driver=org.postgresql.Driver</argument>
+                <argument>--db-url=${pgsql.jdbc}</argument>
+                <argument>--db-port=${pgsql.port}</argument>
+                <argument>--db-user=${pgsql.user}</argument>
+                <argument>--db-password=${pgsql.password}</argument>
                 <argument>--domain=${domain}</argument>
                 <argument>--surati-url=${surati.url}</argument>
                 <argument>--hit-refresh</argument>

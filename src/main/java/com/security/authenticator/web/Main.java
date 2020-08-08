@@ -3,6 +3,8 @@ package com.security.authenticator.web;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.sql.DataSource;
+
 import org.takes.Take;
 import org.takes.facets.auth.PsByFlag;
 import org.takes.facets.auth.PsChain;
@@ -22,13 +24,18 @@ import org.takes.http.Exit;
 import org.takes.http.FtCli;
 import org.takes.tk.TkRedirect;
 
+import com.minlessika.db.BasicDatabase;
+import com.minlessika.db.Database;
+import com.minlessika.db.DatabaseLiquibaseUpdate;
 import com.minlessika.tk.TkWithCookieDomain;
 import com.minlessika.utils.ConsoleArgs;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 /**
  * Entry of application
  * 
- * @author Olivier B. OURA (baudoliver7@gmail.com)
+ * @author Olivier B. OURA (baudolivier.oura@gmail.com)
  *
  */
 public final class Main {
@@ -59,10 +66,30 @@ public final class Main {
 		
 		domain = argsMap.get("domain");
 		
+		final String driver = argsMap.get("driver");
+		final String url = argsMap.get("db-url");
+		final String user = argsMap.get("db-user");
+		final String password = argsMap.get("db-password");
+		
+		final HikariConfig configDb = new HikariConfig();
+		configDb.setDriverClassName(driver);
+		configDb.setJdbcUrl(url);
+		configDb.setUsername(user);
+		configDb.setPassword(password);
+		configDb.setMaximumPoolSize(25);
+
+        final DataSource source = new HikariDataSource(configDb);
+		final Database database = new DatabaseLiquibaseUpdate(
+										new BasicDatabase(source),
+										"liquibase/db.changelog-master.xml"
+								  );
+		
+		database.start();
+		
 		new FtCli(
 			new TkWithCookieDomain(
 				auth(
-					new TkApp(suratiUrl)
+					new TkApp(database, suratiUrl)
 				), 
 				domain
 			),

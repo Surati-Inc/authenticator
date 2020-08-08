@@ -13,7 +13,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 /**
  * JwtToken is used for generating Jwt token
  * 
- * @author Olivier B. OURA (baudoliver7@gmail.com)
+ * @author Olivier B. OURA (baudolivier.oura@gmail.com)
  *
  */
 public final class JwtToken implements Token {

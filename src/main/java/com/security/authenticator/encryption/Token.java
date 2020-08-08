@@ -4,7 +4,7 @@ import io.jsonwebtoken.Claims;
 
 /**
  * Token represents all token norms
- * @author Olivier B. OURA (baudoliver7@gmail.com)
+ * @author Olivier B. OURA (baudolivier.oura@gmail.com)
  *
  */
 public interface Token {

@@ -2,7 +2,7 @@ package com.security.authenticator.exceptions;
 
 /**
  * Invalid token Exception
- * @author Olivier B. OURA (baudoliver7@gmail.com)
+ * @author Olivier B. OURA (baudolivier.oura@gmail.com)
  *
  */
 public final class InvalidTokenException extends RuntimeException {
