@@ -146,11 +146,9 @@ public final class TkApp extends TkWrap {
 									new TkFork(
 										new FkMethods(
 											"POST", 
-											new TkSecure(
-												new TkTransaction(
-													new TkSignup(database), 
-													database
-												)
+											new TkTransaction(
+												new TkSignup(database), 
+												database
 											)
 										)
 									)										
@@ -160,11 +158,9 @@ public final class TkApp extends TkWrap {
 									new TkFork(
 										new FkMethods(
 											"POST", 
-											new TkSecure(
-												new TkTransaction(
-													new TkChangeUserPassword(database), 
-													database
-												)
+											new TkTransaction(
+												new TkChangeUserPassword(database), 
+												database
 											)
 										)
 									)										
@@ -174,11 +170,9 @@ public final class TkApp extends TkWrap {
 									new TkFork(
 										new FkMethods(
 											"POST", 
-											new TkSecure(
-												new TkTransaction(
-													new TkBlockUser(database), 
-													database
-												)
+											new TkTransaction(
+												new TkBlockUser(database), 
+												database
 											)
 										)
 									)										
