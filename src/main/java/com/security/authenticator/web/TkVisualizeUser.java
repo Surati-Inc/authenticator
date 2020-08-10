@@ -46,6 +46,7 @@ public final class TkVisualizeUser implements Take {
 		final XeSource userSource = new XeDirectives(
 										new Directives().add("user")
 										.add("login").set(user.login()).up()
+										.add("password").set(user.password()).up()
 										.add("name").set(user.name()).up()
 										.add("blocked").set(user.blocked()).up()
 										.up()

@@ -30,23 +30,19 @@ public final class DbUsers implements Users {
 	}
 	
 	@Override
-	public boolean authenticate(String login, String password) {
+	public User authenticate(String login, String password) {
 		
-		try(
-			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) as nb FROM app_user WHERE login=? AND password=?");
-		){
-			pstmt.setString(1, login);
-			pstmt.setString(2, password);
+		if(! has(login))
+			throw new IllegalArgumentException("Ce login n'existe pas !");
 		
-			try(final ResultSet rs = pstmt.executeQuery()){
-				rs.next();
-				Long nb = rs.getLong(1);
-				return nb > 0;
-			}
-		} catch(SQLException e) {
-			throw new DatabaseException(e);
-		}
+		final User user = get(login);
+		if(! user.password().equals(password))
+			throw new IllegalArgumentException("Le mot de passe est invalide !");
+		
+		if(user.blocked())
+			throw new IllegalArgumentException("Vous avez été bloqué ! Veuillez SVP contacter votre administrateur.");
+		
+		return user;
 	}
 
 	@Override

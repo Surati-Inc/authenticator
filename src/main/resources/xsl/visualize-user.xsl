@@ -20,8 +20,10 @@
 	    <xsl:apply-templates select="user"/>
 	</xsl:template>
 	<xsl:template match="user">
-	    <p>Login : <xsl:value-of select="login"/></p>
-	    <p><i>Password by default : <code>password</code></i></p>
+	    <p>
+	    Login : <code><xsl:value-of select="login"/></code><br/> 	    
+	    Password : <code><xsl:value-of select="password"/></code>
+	    </p>
 	    <nav>
 		    <ul style="text-align: left">		    	
 		    	<li>

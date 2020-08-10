@@ -12,9 +12,9 @@ public interface Users {
 	 * Check a user credentials
 	 * @param login
 	 * @param password
-	 * @return boolean
+	 * @return User authenticated
 	 */
-	boolean authenticate(String login, String password);
+	User authenticate(String login, String password);
 	
 	/**
 	 * Checks if a user with login exists

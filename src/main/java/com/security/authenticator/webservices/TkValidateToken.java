@@ -52,7 +52,7 @@ private final Database source;
 			
 			final Users users = new DbUsers(source);
 			
-			if(users.has(login) && issuer.equals("Authenticator")) {
+			if(issuer.equals("Authenticator") && users.has(login) && ! users.get(login).blocked()) {
 				return new RsWithStatus(
 						new RsJson(
 							Json.createObjectBuilder()

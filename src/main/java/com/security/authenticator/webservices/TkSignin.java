@@ -49,27 +49,23 @@ public class TkSignin implements Take {
 		
 		try {
 			final Users users = new DbUsers(source);
+			users.authenticate(login, password);
 			
-			if(users.authenticate(login, password)) {
-				
-				final Claims claims = Jwts.claims()
-										  .setIssuedAt(Date.valueOf(LocalDate.now()))
-										  .setIssuer("Authenticator")
-										  .setSubject(login);
-				
-				final String token = new JwtToken(claims, Main.PASS_PHRASE).toString();
-				
-				return new RsWithStatus(
-							new RsJson(
-								Json.createObjectBuilder()
-								.add("token", token)
-								.build()
-							), 
-							HttpURLConnection.HTTP_CREATED
-				);
-			} else {
-				throw new IllegalArgumentException("Login or password is invalid !");
-			}			
+			final Claims claims = Jwts.claims()
+					  .setIssuedAt(Date.valueOf(LocalDate.now()))
+					  .setIssuer("Authenticator")
+					  .setSubject(login);
+
+final String token = new JwtToken(claims, Main.PASS_PHRASE).toString();
+
+return new RsWithStatus(
+		new RsJson(
+			Json.createObjectBuilder()
+			.add("token", token)
+			.build()
+		), 
+		HttpURLConnection.HTTP_CREATED
+);			
 		} catch (IllegalArgumentException e) {
 			// if an error
 			return new RsWithStatus(
